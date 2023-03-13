@@ -1,5 +1,6 @@
 from tkinter import *
 import math
+import subprocess
 
 
 def match(line, keyword):
@@ -33,7 +34,6 @@ def Distance(RSSI, A, n):
     return x
 
 
-import subprocess
 
 Process = subprocess.Popen(["sudo", "-S", "iwlist", "wlp3s0", "scan"], stdout=subprocess.PIPE, universal_newlines=True)
 out, err = Process.communicate()
