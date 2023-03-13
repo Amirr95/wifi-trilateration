@@ -8,3 +8,4 @@ APinfo.py ==> This python script will gather the details of all the available ac
 Position.py ==> This python script uses the details of the distance calculated by the APinfo.py. The three nearest access points will be used as reference (where they are assigned a defined set of coordinates). The location of the user will then be estimated using the trilateration approach and the co-ordinates of the user are then calculated accordingly.
             ==> Before using Postion.py make sure matplotlib library is installed else install it using "sudo pip install matplotlib"
                 Check Pos.png for the results of Position.py under the test environment
+# wifi-trilateration
