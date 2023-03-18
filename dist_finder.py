@@ -3,9 +3,10 @@ import os
 from scapy.all import *
 from scapy.layers.dot11 import Dot11
 
-ssid = "Amir"
+ssid = "Xiaomi 11T Pro"
 iface = "wlp3s0"
 iface_mon = "wlp3s0mon"
+mac_set = set()
 
 
 def distance(rssi, base_rssi, n=2.3):
@@ -35,11 +36,12 @@ def distance_finder(pkt):
             try:
                 if pkt.info.decode() == ssid:
                     mac = pkt.addr2
+                    mac_set.add(mac)
                     rssi = -(256 - ord(pkt.notdecoded[-4:-3]))
                     dist = distance(rssi, -50)
-                    print(f"SSID: {pkt.info.decode()}, RSSI: {rssi}, Distance: {dist} meters")
+                    print(f"SSID: {pkt.info.decode()}, mac: {mac}, RSSI: {rssi}, Distance: {dist} meters")
             except AttributeError:
-                pass
+                print(AttributeError)
                 # print("pkt.info raised an error")
 
 
@@ -70,5 +72,6 @@ if __name__ == "__main__":
     os.system(f"sudo -S airmon-ng start {iface}")
     os.system("sudo tmux new -d")
     os.system(f"tmux send -Rt 0 airodump-ng SPACE {iface_mon} Enter")
-    a = sniff(iface=iface_mon, prn=distance_finder)
+    a = sniff(iface=iface_mon, prn=distance_finder, count=5000)
     os.system(f"sudo -S airmon-ng stop {iface_mon}")
+    print(mac_set)
