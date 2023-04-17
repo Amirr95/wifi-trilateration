@@ -3,7 +3,7 @@ import os
 from scapy.all import *
 from scapy.layers.dot11 import Dot11
 
-ssid = "Xiaomi 11T Pro"
+ssid = "HONOR 70"
 iface = "wlp3s0"
 iface_mon = "wlp3s0mon"
 mac_set = set()
